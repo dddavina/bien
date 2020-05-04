@@ -1,3 +1,5 @@
+
+<div class="show">
 <h1> <%= @review.title %> </h1>
 
 <div class="score">
@@ -11,4 +13,5 @@
 <div class="actions">
   <%= link_to "Edit this review", edit_review_path(@review) %>
   <%= link_to "delete review", review_path(@review), method: :delete, data: {confirm: "Are you sure?"} %>
+</div>
 </div>

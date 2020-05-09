@@ -1,37 +1,55 @@
 <% content_for :page_title, @review.title %>
 
 <div class="show">
-<h1> <%= @review.title %> </h1>
-<h2> <%= @review.restaurant %> </h2>
+    <h1> <%= @review.title %> </h1>
+    <h2> <%= @review.restaurant %> </h2>
 
-<div class="score">
-  <%= @review.score %> /10
-</div>
+    <div class="score">
+      <%= @review.score %> /10
+    </div>
 
-<% if @review.ambiance.present? %>
-  <div class="ambiance">
-    Ambiance: <%= @review.ambiance %>
-  </div>
-<% end %>
+    <% if @review.ambiance.present? %>
+      <div class="ambiance">
+        Ambiance: <%= @review.ambiance %>
+      </div>
+    <% end %>
 
-<% if @review.price.present? %>
-  <div class="price">
-    Price: <%= @review.price %>
-  </div>
-<% end %>
+    <% if @review.price.present? %>
+      <div class="price">
+        Price: <%= @review.price %>
+      </div>
+    <% end %>
 
-<% if @review.cuisine.present? %>
-  <div class="cuisine">
-    Cuisine: <%= @review.cuisine %>
-  </div>
-<% end %>
+    <% if @review.cuisine.present? %>
+      <div class="cuisine">
+        Cuisine: <%= @review.cuisine %>
+      </div>
+    <% end %>
 
-<div class="body">
-  <%= simple_format @review.body %>
-</div>
+    <div class="body">
+      <%= simple_format @review.body %>
+    </div>
 
-<div class="actions">
-  <%= link_to "Edit this review", edit_review_path(@review) %>
-  <%= link_to "delete review", review_path(@review), method: :delete, data: {confirm: "Are you sure?"} %>
-</div>
+    <div class="actions">
+      <%= link_to "Edit this review", edit_review_path(@review) %>
+      <%= link_to "delete review", review_path(@review), method: :delete, data: {confirm: "Are you sure?"} %>
+    </div>
+
+    <h3> Comment </h3>
+
+    <% @review.comments.order("created_at desc").each do |comment| %>
+
+      <div class="comment">
+        <%= simple_format comment.body %>
+        </div>
+        <p class="posted"> Posted <%= time_ago_in_words comment.created_at %> ago</p>
+    <% end %>
+
+    <h3> Add a comment </h3>
+
+    <%= simple_form_for [@review, Comment.new] do |f| %>
+      <%= f.input :body %>
+      <%= f.button :submit, "Add comment" %>
+    <% end %>
+
 </div>

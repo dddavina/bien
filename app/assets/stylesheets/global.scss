@@ -64,6 +64,30 @@ nav {
 main {
   min-height: calc(100vh - 150px);
   padding: 1em;
+  a{
+    display: inline-flex;
+    margin-right: 1em;
+  }
+  nav{
+    display: block;
+    border-bottom: 1px solid $green;
+    text-align: center;
+div {
+  display: inline-flex;
+  a {
+    margin-right: 1em;
+  }
+}
+form {
+  display: inline-flex;
+  input {
+    font-family: $bodyFont;
+
+    padding: 7px 20px;
+    border: 1px solid $green;
+  }
+}
+  }
 }
 
 .review {
